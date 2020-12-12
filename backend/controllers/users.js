@@ -15,13 +15,12 @@ const signUp = async (req, res) => {
 
     const { name, username, email, password } = req.body;
 
-    // save user to db
-    const user = await new User({
+    const user = new User({
       name,
       username,
       email,
       password: await argon2.hash(password),
-    }).save();
+    });
 
     // save and send token verify
     const tokenVerify = await v4();
@@ -30,12 +29,15 @@ const signUp = async (req, res) => {
       `${keys.VERIFY_USER_PREFIX}:${user._id}`
     );
     await redisClient.expire(tokenVerify, 60 * 15); // expire in 15 minutes
-    nodemailer.sendMail(
+    // send email
+    await nodemailer.sendMail(
       email,
       "Verify account",
       tokenVerify,
       keys.EMAIL_TYPE.VERIFY_USER
     );
+    // save user to db
+    await user.save();
 
     res.json({ success: true });
   } catch (error) {
@@ -107,7 +109,7 @@ const resendVerify = async (req, res) => {
       `${keys.VERIFY_USER_PREFIX}:${user._id}`
     );
     await redisClient.expire(tokenVerify, 60 * 15); // expire in 15 minutes
-    nodemailer.sendMail(
+    await nodemailer.sendMail(
       user.email,
       "Verify account",
       tokenVerify,

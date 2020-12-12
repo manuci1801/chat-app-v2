@@ -3,6 +3,11 @@ module.exports = {
     ADMIN: "ADMIN",
     USER: "USER",
   },
+  CONTACT_STATUS: ["PENDING", "CONFIRM"],
+  CONVERSATION_TYPE: {
+    PRIVATE: "PRIVATE",
+    GROUP: "GROUP",
+  },
   EMAIL_TYPE: {
     VERIFY_USER: "VERIFY_USER",
   },
@@ -15,6 +20,6 @@ module.exports = {
   REDIS_HOST: process.env.REDIS_HOST,
   REDIS_PORT: process.env.REDIS_PORT,
   REDIS_PASS: process.env.REDIS_PASS,
-  MAILGUN_API_KEY: process.env.MAILGUN_API_KEY,
-  MAILGUN_DOMAIN: process.env.MAILGUN_DOMAIN,
+  MAILGUN_USER: process.env.MAILGUN_USER,
+  MAILGUN_PASS: process.env.MAILGUN_PASS,
 };
