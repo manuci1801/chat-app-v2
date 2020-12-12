@@ -12,6 +12,9 @@ module.exports = {
   SECRET_KEY_JWT: "some thing secret",
   VERIFY_USER_PREFIX: "VERIFY_USER_PREFIX",
   FORGOT_PASSWORD_PREFIX: "FORGOT_PASSWORD_PREFIX",
+  REDIS_HOST: process.env.REDIS_HOST,
+  REDIS_PORT: process.env.REDIS_PORT,
+  REDIS_PASS: process.env.REDIS_PASS,
   MAILGUN_API_KEY: process.env.MAILGUN_API_KEY,
   MAILGUN_DOMAIN: process.env.MAILGUN_DOMAIN,
 };
