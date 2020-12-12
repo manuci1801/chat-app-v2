@@ -1,5 +1,5 @@
 import React from "react";
-import fetchClient from "../../utils/fetchClient";
+import fetchClient from "../../config/fetchClient";
 import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "../../ColorModeSwitcher";
 

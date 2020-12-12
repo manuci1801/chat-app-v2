@@ -6,7 +6,7 @@ import * as yup from "yup";
 import InputField from "../../components/common/InputField";
 import ToastNotify from "../../components/common/ToastNotify";
 import { signIn } from "../../redux/actions/user";
-import fetchClient from "../../utils/fetchClient";
+import fetchClient from "../../config/fetchClient";
 
 const signInValidationSchema = yup.object({
   usernameOrEmail: yup.string().required(),
