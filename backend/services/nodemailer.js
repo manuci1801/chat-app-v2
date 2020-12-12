@@ -1,16 +1,16 @@
 const nodemailer = require("nodemailer");
+const mg = require("nodemailer-mailgun-transport");
 
 const { EMAIL_TYPE } = require("../config/keys");
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  host: "smtp.gmail.com",
-  port: 465,
+const auth = {
   auth: {
-    user: "123456khj001@gmail.com",
-    pass: "Panel123@@",
+    api_key: "16478ec8e5c3c944356d386be564c1e3-4879ff27-a89f9dcb",
+    domain: "sandbox2d526551c78a432ca1e088a575c4cebd.mailgun.org",
   },
-});
+};
+
+const transporter = nodemailer.createTransport(mg(auth));
 
 const sendMail = async (to, subject, data, type) => {
   let htmlBody;
@@ -25,7 +25,7 @@ const sendMail = async (to, subject, data, type) => {
   }
 
   await transporter.sendMail({
-    from: "munumber2",
+    from: "manuci1801@gmail.com",
     to,
     subject,
     html: htmlBody,

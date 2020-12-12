@@ -8,12 +8,13 @@ const cors = require("cors");
 
 const combineRoute = require("./routes");
 const { passportConfig, mongooseConfig } = require("./config");
+const { FRONTEND_URI } = require("./config/keys");
 
 const app = express();
 
 // cors config domain
 var corsOptions = {
-  origin: "http://localhost:3000",
+  origin: FRONTEND_URI,
   optionsSuccessStatus: 200,
   method: ["GET", "PUT", "POST", "DELETE"],
 };
@@ -25,7 +26,7 @@ mongooseConfig.connectDB();
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
 
