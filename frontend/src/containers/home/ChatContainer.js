@@ -30,7 +30,7 @@ import {
 
 const ChatContainer = ({ setIsChat, socket }) => {
   return (
-    <>
+    <Flex minH="100vh" maxH="100vh">
       <Box w={{ base: "4em", md: "4em", xl: "20em" }} minH="100%" maxH="100%">
         {/* Left Header */}
         <Flex p="0.5em 1em" justify="space-between">
@@ -274,7 +274,7 @@ const ChatContainer = ({ setIsChat, socket }) => {
           </HStack>
         </Flex>
       </Box>
-    </>
+    </Flex>
   );
 };
 

@@ -1,4 +1,4 @@
-const chatSocket = (socket) => {
+const chatSocket = (io, socket) => {
   return socket;
 };
 

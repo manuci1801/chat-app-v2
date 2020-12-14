@@ -14,7 +14,7 @@ function Home() {
   }, []);
 
   return (
-    <Flex minH="100vh" maxH="100vh">
+    <>
       {socket ? (
         isChat ? (
           <ChatContainer setIsChat={setIsChat} socket={socket} />
@@ -24,7 +24,7 @@ function Home() {
       ) : (
         <div>Loading...</div>
       )}
-    </Flex>
+    </>
   );
 }
 
