@@ -2,21 +2,36 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 const express = require("express");
+const app = express();
 const logger = require("morgan");
 const passport = require("passport");
 const cors = require("cors");
+const http = require("http");
+const socketIO = require("socket.io");
 
 const combineRoute = require("./routes");
+const rootSocket = require("./sockets");
 const { passportConfig, mongooseConfig } = require("./config");
 const { FRONTEND_URI } = require("./config/keys");
 
-const app = express();
+// config socketio
+var server = http.createServer(app).listen(5005);
+var io = socketIO(server, {
+  serveClient: false,
+  pingInterval: 10000,
+  pingTimeout: 5000,
+  cookie: false,
+  cors: {
+    origin: FRONTEND_URI,
+    methods: ["GET", "POST"],
+  },
+});
+rootSocket(io);
 
 // cors config domain
 var corsOptions = {
-  origin: FRONTEND_URI,
-  optionsSuccessStatus: 200,
-  method: ["GET", "PUT", "POST", "DELETE"],
+  origin: [FRONTEND_URI],
+  credentials: true,
 };
 
 // connectDB
@@ -26,9 +41,9 @@ mongooseConfig.connectDB();
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors(corsOptions));
 
 // passport config
 passportConfig(passport);

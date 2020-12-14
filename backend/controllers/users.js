@@ -11,17 +11,15 @@ const User = require("../models/User");
 const signUp = async (req, res) => {
   try {
     const { isValid, errors } = signUpValidation(req.body);
+    // check validate data
     if (!isValid) return res.status(400).json(errors);
-
     const { name, username, email, password } = req.body;
-
     const user = new User({
       name,
       username,
       email,
       password: await argon2.hash(password),
     });
-
     // save and send token verify
     const tokenVerify = await v4();
     await redisClient.set(
@@ -29,16 +27,15 @@ const signUp = async (req, res) => {
       `${keys.VERIFY_USER_PREFIX}:${user._id}`
     );
     await redisClient.expire(tokenVerify, 60 * 15); // expire in 15 minutes
+    // save user to db
+    await user.save();
     // send email
-    await nodemailer.sendMail(
+    nodemailer.sendMail(
       email,
       "Verify account",
       tokenVerify,
       keys.EMAIL_TYPE.VERIFY_USER
     );
-    // save user to db
-    await user.save();
-
     res.json({ success: true });
   } catch (error) {
     console.log(error);
@@ -53,25 +50,26 @@ const signUp = async (req, res) => {
 const signIn = async (req, res) => {
   try {
     const { isValid, errors } = signInValidation(req.body);
+    // check validate data
     if (!isValid) return res.status(400).json(errors);
-
     const { usernameOrEmail, password } = req.body;
+    // check user is exists
     const user = await User.findOne({
       $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });
     if (!user)
       return res.status(400).json({ usernameOrEmail: "user does not exists" });
-
+    // check user is verify
     if (!user.isVerify)
       return res.status(400).json({
         usernameOrEmail:
           "user is not verified, please check your email to verify your account",
       });
-
+    // check password is match
     const isMatch = await argon2.verify(user.password, password);
     if (!isMatch)
       return res.status(400).json({ password: "password is wrong" });
-
+    // create token
     const payload = {
       _id: user._id,
       name: user.name,
@@ -79,11 +77,9 @@ const signIn = async (req, res) => {
       email: user.email,
       role: user.role,
     };
-
     const token = await jwt.sign(payload, keys.SECRET_KEY_JWT, {
       expiresIn: "3h",
     });
-
     res.json({ token });
   } catch (error) {
     console.log(error);
@@ -94,14 +90,12 @@ const signIn = async (req, res) => {
 const resendVerify = async (req, res) => {
   try {
     const { usernameOrEmail } = req.body;
-
     // check is exist user
     const user = await User.findOne({
       $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });
     if (!user)
       return res.status(400).json({ usernameOrEmail: "user does not exists" });
-
     // save and send token verify
     const tokenVerify = await v4();
     await redisClient.set(
@@ -109,7 +103,7 @@ const resendVerify = async (req, res) => {
       `${keys.VERIFY_USER_PREFIX}:${user._id}`
     );
     await redisClient.expire(tokenVerify, 60 * 15); // expire in 15 minutes
-    await nodemailer.sendMail(
+    nodemailer.sendMail(
       user.email,
       "Verify account",
       tokenVerify,
@@ -126,16 +120,12 @@ const resendVerify = async (req, res) => {
 const verifyUser = async (req, res) => {
   try {
     const { token } = req.params;
-
     const key = await redisClient.get(token);
     if (!key) return res.status(400).json({ token: "invalid token" });
-
     const [prefix, userId] = key.split(":");
     if (prefix !== keys.VERIFY_USER_PREFIX) return res.json({ success: true });
-
     redisClient.del(token);
     await User.findByIdAndUpdate(userId, { isVerify: true }, { new: true });
-
     res.json({ success: true });
   } catch (error) {
     console.log(error);

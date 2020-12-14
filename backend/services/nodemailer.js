@@ -1,17 +1,13 @@
 const nodemailer = require("nodemailer");
 
-const { EMAIL_TYPE, MAILGUN_USER, MAILGUN_PASS } = require("../config/keys");
+const { EMAIL_TYPE, GMAIL_USER, GMAIL_PASS } = require("../config/keys");
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.mailgun.org",
-  port: 587,
-  secure: false,
+  service: "gmail",
+  host: "smtp.gmail.com",
   auth: {
-    user: MAILGUN_USER,
-    pass: MAILGUN_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
+    user: GMAIL_USER,
+    pass: GMAIL_PASS,
   },
 });
 

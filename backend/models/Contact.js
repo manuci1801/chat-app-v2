@@ -13,7 +13,8 @@ const contactSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    enum: [...CONTACT_STATUS],
+    enum: [CONTACT_STATUS.PENDING, CONTACT_STATUS.CONFIRM],
+    default: CONTACT_STATUS.PENDING,
   },
   createdAt: {
     type: Number,

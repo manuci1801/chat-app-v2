@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const { CONTACT_STATUS } = require("../config/keys");
+const { ROOM_TYPE } = require("../config/keys");
 
 const conversationSchema = mongoose.Schema({
   name: {
@@ -36,4 +36,4 @@ const conversationSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("conversations", conversationSchema);
+module.exports = mongoose.model("rooms", conversationSchema);

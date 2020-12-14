@@ -3,8 +3,11 @@ module.exports = {
     ADMIN: "ADMIN",
     USER: "USER",
   },
-  CONTACT_STATUS: ["PENDING", "CONFIRM"],
-  CONVERSATION_TYPE: {
+  CONTACT_STATUS: {
+    PENDING: "PENDING",
+    CONFIRM: "CONFIRM",
+  },
+  ROOM_TYPE: {
     PRIVATE: "PRIVATE",
     GROUP: "GROUP",
   },
@@ -17,9 +20,10 @@ module.exports = {
   SECRET_KEY_JWT: "some thing secret",
   VERIFY_USER_PREFIX: "VERIFY_USER_PREFIX",
   FORGOT_PASSWORD_PREFIX: "FORGOT_PASSWORD_PREFIX",
+  SOCKET_PREFIX: "SOCKET_PREFIX",
   REDIS_HOST: process.env.REDIS_HOST,
   REDIS_PORT: process.env.REDIS_PORT,
   REDIS_PASS: process.env.REDIS_PASS,
-  MAILGUN_USER: process.env.MAILGUN_USER,
-  MAILGUN_PASS: process.env.MAILGUN_PASS,
+  GMAIL_USER: process.env.GMAIL_USER,
+  GMAIL_PASS: process.env.GMAIL_PASS,
 };
