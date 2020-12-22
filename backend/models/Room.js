@@ -6,7 +6,7 @@ const conversationSchema = mongoose.Schema({
   name: {
     type: String,
   },
-  member: [
+  members: [
     {
       user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -17,19 +17,15 @@ const conversationSchema = mongoose.Schema({
       },
     },
   ],
-  // lastMessage: {
-  //   user: {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //       ref: "users",
-  //   },
-  //   content: {
-
-  //   },
-  //   createdAt: {
-  //     type: Number,
-  //     default: Date.now(),
-  //   },
-  // },
+  type: {
+    type: String,
+    enum: [ROOM_TYPE.PRIVATE, ROOM_TYPE.GROUP],
+    default: ROOM_TYPE.PRIVATE,
+  },
+  lastMessage: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "messages",
+  },
   createdAt: {
     type: Number,
     default: Date.now(),
