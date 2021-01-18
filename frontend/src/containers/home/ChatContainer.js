@@ -41,9 +41,21 @@ const ChatContainer = ({ setIsChat, socket }) => {
             : { base: "none", md: "block", xl: "block" }
         }
         w={{ base: "100%", md: "20em", xl: "20em" }}
-        bg="tomato"
+        bg="gray.200"
+        px="0.5em"
       >
-        <Button onClick={() => setIsRoom(true)}>Mess</Button>
+        {/* <Button onClick={() => setIsRoom(true)}>Mess</Button> */}
+        <Flex align="center" py="0.5em">
+          <Image 
+            boxSize="36px"
+            objectFit="cover" 
+            borderRadius="full" 
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcFLpnetKFyaMFO3SrUmjU4s1Cg94IGGRcjw&usqp=CAU" 
+            alt="Avatar"
+            mr="0.5em"
+          />
+          <Text fontSize="md">Some thing ten</Text>
+        </Flex>
       </Box>
       <Box
         display={
@@ -55,13 +67,13 @@ const ChatContainer = ({ setIsChat, socket }) => {
         minH="100%"
         maxH="100%"
       >
-        <Button
+        {/* <Button
           onClick={() => {
             setIsRoom(false);
           }}
         >
           Back
-        </Button>
+        </Button> */}
       </Box>
     </Flex>
   );
