@@ -3,10 +3,10 @@ import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
-import InputField from "../../components/common/InputField";
-import ToastNotify from "../../components/common/ToastNotify";
-import { signIn } from "../../redux/actions/user";
-import fetchClient from "../../config/fetchClient";
+import InputField from "components/common/InputField";
+import ToastNotify from "components/common/ToastNotify";
+import { signIn } from "redux/actions/user";
+import fetchClient from "config/fetchClient";
 
 const signUpValidationSchema = yup.object({
   name: yup.string().required().min(3).max(50),

@@ -4,14 +4,15 @@ import { ChakraProvider, theme } from "@chakra-ui/react";
 import { Provider } from "react-redux";
 import jwtDecode from "jwt-decode";
 
-import store from "./redux/store";
-import PrivateRoute from "./components/routing/PrivateRoute";
-import PublicRoute from "./components/routing/PublicRoute";
+import store from "redux/store";
+import PrivateRoute from "components/routing/PrivateRoute";
+import PublicRoute from "components/routing/PublicRoute";
 
-import { setCurrentUser } from "./redux/actions/user";
+import { setCurrentUser } from "redux/actions/user";
 
-import Auth from "./containers/auth";
-import Home from "./containers/home/Home";
+import Auth from "containers/auth";
+import Home from "containers/home/Home";
+import "App.css";
 
 // Check for token
 if (localStorage.getItem("auth-token")) {
