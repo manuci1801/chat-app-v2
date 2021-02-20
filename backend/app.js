@@ -22,7 +22,7 @@ var io = socketIO(server, {
   pingTimeout: 5000,
   cookie: false,
   cors: {
-    origin: FRONTEND_URI,
+    origin: [FRONTEND_URI, "http://localhost:3000"],
     methods: ["GET", "POST"],
   },
 });
@@ -30,7 +30,7 @@ rootSocket(io);
 
 // cors config domain
 var corsOptions = {
-  origin: [FRONTEND_URI],
+  origin: [FRONTEND_URI, "http://localhost:3000"],
   credentials: true,
 };
 

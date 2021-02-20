@@ -54,7 +54,6 @@ const ChatContainer = ({ setIsChat, socket }) => {
         w={{ base: "100%", md: "20em", xl: "20em" }}
         bg="gray.200"
       >
-        {/* <Button onClick={() => setIsRoom(true)}>Mess</Button> */}
         <Box px="0.5em">
           <Flex align="center" py="1em">
             <Avatar src="" mr="0.5em" />
@@ -134,6 +133,7 @@ const ChatContainer = ({ setIsChat, socket }) => {
               justify="space-between"
               p="0.5em"
               _hover={{ cursor: "pointer", bg: "blue.100", opacity: "0.8" }}
+              onClick={() => setIsRoom(true)}
             >
               <Avatar size="sm" src="" mr="0.5em">
                 <AvatarBadge boxSize="1.25em" bg="green.400" />

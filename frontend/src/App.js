@@ -37,7 +37,7 @@ function App() {
         <Router>
           <Switch>
             <PublicRoute exact path="/auth" component={Auth} />
-            <PublicRoute exact path="/" component={Home} />
+            <PrivateRoute exact path="/" component={Home} />
           </Switch>
         </Router>
       </Provider>

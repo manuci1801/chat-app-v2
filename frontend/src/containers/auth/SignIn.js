@@ -6,7 +6,7 @@ import * as yup from "yup";
 import InputField from "components/common/InputField";
 import ToastNotify from "components/common/ToastNotify";
 import { signIn } from "redux/actions/user";
-import fetchClient from "config/fetchClient";
+import http from "config/http";
 
 const signInValidationSchema = yup.object({
   usernameOrEmail: yup.string().required(),
@@ -22,7 +22,7 @@ const SignIn = ({ setIsSignIn }) => {
         validationSchema={signInValidationSchema}
         onSubmit={async (values, { setErrors, setSubmitting }) => {
           try {
-            const res = await fetchClient().post("api/users/sign-in", values);
+            const res = await http.post("/users/sign-in", values);
             setSubmitting(false);
             ToastNotify({
               title: "Sign in successful",

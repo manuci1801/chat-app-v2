@@ -1,12 +1,5 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
+import { Box, Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import * as yup from "yup";
-import InputField from "components/common/InputField";
-import ToastNotify from "components/common/ToastNotify";
-import { signIn } from "redux/actions/user";
-import fetchClient from "config/fetchClient";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 

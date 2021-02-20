@@ -24,6 +24,6 @@ module.exports = {
   REDIS_HOST: process.env.REDIS_HOST,
   REDIS_PORT: process.env.REDIS_PORT,
   REDIS_PASS: process.env.REDIS_PASS,
-  GMAIL_USER: process.env.GMAIL_USER,
-  GMAIL_PASS: process.env.GMAIL_PASS,
+  EMAIL_USER: process.env.EMAIL_USER,
+  EMAIL_PASS: process.env.EMAIL_PASS,
 };
